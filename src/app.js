@@ -150,7 +150,7 @@ class App {
 	}
 }
 
-document.body.innerHTML += Footer();
+// document.body.innerHTML += Footer();
 
 document.addEventListener('DOMContentLoaded', () => {
 	const app = new App(document.body, location);
