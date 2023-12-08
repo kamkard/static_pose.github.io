@@ -7,9 +7,8 @@
 		name="viewport"
 		content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
 	/>
-	<meta name="author" content="Don McCurdy" />
-	<meta name="description" content="Drag-and-drop preview tool for glTF 2.0 3D models." />
-	<link rel="canonical" href="https://gltf-viewer.donmccurdy.com/" />
+	<meta name="author" content="David Kamkar" />
+	<meta name="description" content="show 3d profile with video" />
 	<link rel="shortcut icon" href="/favicon.ico" />
 	<link rel="stylesheet" href="style.css" />
 	<link href="https://fonts.googleapis.com/css?family=Raleway:300,400" rel="stylesheet" />
@@ -17,14 +16,24 @@
 </head>
 <body>
 	<header>
-		<h1><a href="/">glTF Viewer</a></h1>
+		<h1><a href="/">Pose Kinetics</a></h1>
 	</header>
 	<main class="wrap">
-		<div class="dropzone">
+		<div class="viewer">
+		</div>
+		
+		<div id="video-container">
+			<video autoplay loop muted>
+				<source src="https://raw.githubusercontent.com/kamkard/three-gltf-viewer/main/data/squatvideo.mp4" type = "video/mp4">
+			Your browser does not support the vdieo tagged.
+		</video>
+		</div>		
+			
+		<!-- <div class="dropzone"> 
 			<div class="placeholder">
 				<p>Drag glTF 2.0 file or folder here</p>
 			</div>
-			<div class="upload-btn">
+ 			<div class="upload-btn">
 				<input type="file" name="file-input[]" id="file-input" multiple="" />
 				<label for="file-input">
 					<svg
@@ -39,7 +48,7 @@
 					</svg>
 					<span>Choose file</span>
 				</label>
-			</div>
+			</div> -->
 		</div>
 		<div class="spinner"></div>
 	</main>

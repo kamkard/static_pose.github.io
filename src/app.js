@@ -11,7 +11,7 @@ if (!(window.File && window.FileReader && window.FileList && window.Blob)) {
 	console.error('The File APIs are not fully supported in this browser.');
 } else if (!WebGL.isWebGLAvailable()) {
 	console.error('WebGL is not supported in this browser.');
-}
+}	
 
 class App {
 	/**
@@ -29,14 +29,15 @@ class App {
 
 		this.el = el;
 		this.viewer = null;
-		this.viewerEl = null;
+		this.viewerEl = el.querySelector('.viewer');
 		this.spinnerEl = el.querySelector('.spinner');
-		this.dropEl = el.querySelector('.dropzone');
-		this.inputEl = el.querySelector('#file-input');
+		// this.dropEl = el.querySelector('.dropzone');
+		// this.inputEl = el.querySelector('#file-input');
 		this.validator = new Validator(el);
 
-		this.createDropzone();
-		this.hideSpinner();
+		// this.createDropzone();
+		// this.hideSpinner();
+		this.loadFromGitHub();
 
 		const options = this.options;
 
@@ -65,10 +66,12 @@ class App {
 	 * @return {Viewer}
 	 */
 	createViewer() {
-		this.viewerEl = document.createElement('div');
-		this.viewerEl.classList.add('viewer');
-		this.dropEl.innerHTML = '';
-		this.dropEl.appendChild(this.viewerEl);
+		// this.viewerEl = document.createElement('div');
+		// this.viewerEl.classList.add('viewer');
+		// this.dropEl.innerHTML = '';
+		// this.el.innerHTML = '';
+		// this.dropEl.appendChild(this.viewerEl);
+		// this.el.appendChild(this.viewerEl);
 		this.viewer = new Viewer(this.viewerEl, this.options);
 		return this.viewer;
 	}
@@ -148,13 +151,92 @@ class App {
 	hideSpinner() {
 		this.spinnerEl.style.display = 'none';
 	}
+
+	loadFromGitHub() {
+		const githubUrl = 'https://raw.githubusercontent.com/kamkard/three-gltf-viewer/main/data/glb_output.glb';
+		
+		fetch(githubUrl)
+			.then(response => {
+				if(!response.ok) {
+					throw new Error(`Failed to load GLB file from GitHub: ${response.status} ${response.statusText}`);
+				}
+				return response.arrayBuffer();
+			})
+			.then(arrayBuffer => {
+                const blob = new Blob([arrayBuffer], { type: 'model/gltf-binary' });
+                const fileName = 'model.glb'; // Adjust the file name if needed
+                const file = new File([blob], fileName);
+
+                // Assuming you have the path where you want to store the file
+                const filePath = '';
+
+                // Create or initialize your fileMap
+                const fileMap = new Map();
+                fileMap.set(filePath, file);
+
+                // Call your view function with the loaded file and fileMap
+                this.view(file, filePath, fileMap);
+            })
+            .catch(error => {
+                this.onError(`Error loading GLB file from GitHub: ${error.message}`);
+            });
+
+	}
+
+	setupTabs() {
+    const tabs = document.querySelectorAll('.tab-button');
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            const tabName = tab.id.replace('-btn', '');
+            this.openTab(tabName);
+        	});
+    	});
+	}
+
+	openTab(tabName) {
+    // Your existing openTab logic
+    // var i, tabContent;
+    const selectedTab = document.getElementById(tabName);
+    const videoContainer = document.getElementById("video-container");
+	const viewerTab = document.getElementById("viewer");
+
+    if (selectedTab == videoContainer){
+        videoContainer.classList.add("active");
+        viewerTab.classList.remove("active");
+    } else if (selectedTab === viewerTab) {
+        videoContainer.classList.remove("active");
+        viewerTab.classList.add("active");
+    // tabContent = document.getElementsByClassName('.tab');
+    // for (i = 0; i < tabContent.length; i++) {
+    //     tabContent[i].classList.remove("active");
+    // 	}
+    
+    // if (selectedTab) {
+    //     selectedTab.classList.add("active"); // Add "active" class to the selected tab
+    }
+    // document.getElementById(tabName).style.display = "block";
+	// tabContents.forEach(tabContent => {
+    //     tabContent.style.display = "none";
+    // });
+
+    // const selectedTab = document.getElementById(tabName);
+    // if (selectedTab) {
+    //     selectedTab.style.display = "block";
+    // } else {
+    //     console.error(`Tab with ID '${tabName}' not found.`);
+    // }
+	}	
 }
+
+
+
+
 
 // document.body.innerHTML += Footer();
 
 document.addEventListener('DOMContentLoaded', () => {
 	const app = new App(document.body, location);
-
+	app.setupTabs(); // Call the function to set up event listeners for tabs
 	window.VIEWER.app = app;
 
 	console.info('[glTF Viewer] Debugging data exported as `window.VIEWER`.');
