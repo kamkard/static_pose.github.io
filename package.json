@@ -22,7 +22,7 @@
 		"build": "vite build",
 		"clean": "rimraf dist/**",
 		"test": "node test/gen_test.js",
-		// "deploy": "npm run build && vercel --local-config vercel.json --prod",
+		"_comment": "npm run build && vercel --local-config vercel.json --prod",
 		"deploy": "gh-pages -d dist"
 		"postversion": "git push && git push --tags"
 	},
