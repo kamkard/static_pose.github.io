@@ -27,7 +27,7 @@ class App {
 			cameraPosition: hash.cameraPosition ? hash.cameraPosition.split(',').map(Number) : null,
 		};
 
-		this.el = el;
+		this.el = el; //document.body 
 		this.viewer = null;
 		this.viewerEl = el.querySelector('.viewer');
 		this.spinnerEl = el.querySelector('.spinner');
