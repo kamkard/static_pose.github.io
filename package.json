@@ -1,5 +1,4 @@
 {
-	"homepage": "http://kamkard.github.io/static_pose/",
 	"private": true,
 	"version": "1.5.1",
 	"description": "Preview glTF models using three.js and a drag-and-drop interface.",
