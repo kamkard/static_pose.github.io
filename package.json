@@ -5,7 +5,6 @@
 	"author": "Don McCurdy <dm@donmccurdy.com> (https://www.donmccurdy.com)",
 	"license": "MIT",
 	"main": "public/app.js",
-
 	"browserslist": [
 		">1%",
 		"not dead"
