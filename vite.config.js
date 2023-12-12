@@ -2,6 +2,6 @@
 import { defineConfig } from 'vite'
 
 export default defineConfig({
-	base: '/static_pose.github.io/dist'
+	base: '/static_pose.github.io/dist/'
 
 })
