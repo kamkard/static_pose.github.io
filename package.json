@@ -5,7 +5,7 @@
 	"author": "Don McCurdy <dm@donmccurdy.com> (https://www.donmccurdy.com)",
 	"license": "MIT",
 	"main": "public/app.js",
-	"homepage": "https://kamkard.github.io/static_pose/",
+
 	"browserslist": [
 		">1%",
 		"not dead"
