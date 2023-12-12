@@ -1,4 +1,5 @@
 import WebGL from 'three/examples/jsm/capabilities/WebGL.js';
+// import WebGL from 'https://cdnjs.cloudflare.com/ajax/libs/three.js/0.159.0/three.js'
 import { Viewer } from './viewer.js';
 import { SimpleDropzone } from 'simple-dropzone';
 import { Validator } from './validator.js';
