@@ -2,6 +2,6 @@
 import { defineConfig } from 'vite'
 
 export default defineConfig({
-	base: '/static_pose/dist/'
+	base: '/static_pose/'
 
 })
